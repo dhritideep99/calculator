@@ -1,0 +1,706 @@
+
+/* =========================
+   PREMIUM CALCULATOR UI
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background: linear-gradient(
+        135deg,
+        #09001f,
+        #170044,
+        #001b40
+    );
+
+    transition: background 0.5s ease;
+}
+
+/* Calculator Box */
+
+.calculator {
+    width: 380px;
+    max-width: 100%;
+
+    padding: 28px;
+
+    border-radius: 30px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 0 30px rgba(110, 0, 255, 0.3),
+        inset 0 0 20px rgba(255, 255, 255, 0.03);
+
+    transition: 0.4s;
+}
+
+/* Heading */
+
+h1 {
+    text-align: center;
+
+    color: white;
+
+    font-size: 30px;
+
+    margin-bottom: 20px;
+
+    text-shadow: 0 0 15px #8b5cf6;
+}
+
+/* Theme Button */
+
+#themeToggle {
+    width: 100%;
+
+    height: 42px;
+
+    margin-bottom: 20px;
+
+    border-radius: 12px;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    background: rgba(255, 255, 255, 0.1);
+
+    color: white;
+
+    font-size: 14px;
+
+    cursor: pointer;
+}
+
+/* Display */
+
+#display {
+    width: 100%;
+
+    height: 75px;
+
+    margin-bottom: 20px;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    color: #00ffcc;
+
+    font-size: 30px;
+
+    text-align: right;
+
+    outline: none;
+
+    box-shadow:
+        inset 0 0 15px rgba(0, 255, 204, 0.1);
+}
+
+/* Scientific Buttons */
+
+.scientific-buttons {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 10px;
+
+    margin-bottom: 12px;
+}
+
+/* Memory Buttons */
+
+.memory-buttons {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+}
+
+/* All Buttons */
+
+button {
+    height: 58px;
+
+    border: none;
+
+    border-radius: 16px;
+
+    font-size: 19px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    color: white;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    transition: all 0.2s ease;
+}
+
+/* Hover Effect */
+
+button:hover {
+    transform: translateY(-3px) scale(1.03);
+
+    background: rgba(255, 255, 255, 0.25);
+
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+}
+
+/* Click Effect */
+
+button:active {
+    transform: scale(0.94);
+}
+
+/* Scientific Buttons */
+
+.scientific-buttons button {
+    background: rgba(139, 92, 246, 0.4);
+
+    font-size: 16px;
+}
+
+/* Memory Buttons */
+
+.memory-buttons button {
+    background: rgba(0, 180, 255, 0.25);
+
+    font-size: 15px;
+}
+
+/* Operators */
+
+.operator {
+    background: linear-gradient(135deg, #ff7b00, #ff006e);
+}
+
+/* Clear Button */
+
+.clear {
+    background: linear-gradient(135deg, #ff1744, #b00020);
+}
+
+/* Equal Button */
+
+.equals {
+    background: linear-gradient(135deg, #00c853, #00a884);
+
+    grid-column: span 2;
+}
+
+/* Zero Button */
+
+.zero {
+    grid-column: span 2;
+}
+
+/* History */
+
+.history {
+    margin-top: 25px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.history h2 {
+    color: white;
+
+    font-size: 20px;
+
+    margin-bottom: 12px;
+}
+
+#historyList {
+    list-style: none;
+
+    max-height: 150px;
+
+    overflow-y: auto;
+}
+
+#historyList li {
+    padding: 10px;
+
+    margin-bottom: 7px;
+
+    border-radius: 10px;
+
+    color: white;
+
+    background: rgba(255, 255, 255, 0.1);
+
+    font-size: 14px;
+}
+
+.clear-history {
+    width: 100%;
+
+    height: 42px;
+
+    margin-top: 12px;
+
+    background: #d50000;
+
+    font-size: 14px;
+}
+
+/* =========================
+   LIGHT MODE
+========================= */
+
+body.light-mode {
+    background: linear-gradient(
+        135deg,
+        #dbeafe,
+        #f5d0fe
+    );
+}
+
+body.light-mode .calculator {
+    background: rgba(255, 255, 255, 0.55);
+
+    border: 1px solid rgba(255, 255, 255, 0.7);
+
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+body.light-mode h1 {
+    color: #222;
+
+    text-shadow: none;
+}
+
+body.light-mode #themeToggle {
+    color: #222;
+
+    background: rgba(255, 255, 255, 0.7);
+}
+
+body.light-mode #display {
+    background: rgba(255, 255, 255, 0.8);
+
+    color: #222;
+}
+
+body.light-mode button {
+    color: #222;
+
+    background: rgba(255, 255, 255, 0.7);
+}
+
+body.light-mode .operator,
+body.light-mode .clear,
+body.light-mode .equals,
+body.light-mode .clear-history,
+body.light-mode .scientific-buttons button,
+body.light-mode .memory-buttons button {
+    color: white;
+}
+
+body.light-mode .history h2 {
+    color: #222;
+}
+
+body.light-mode #historyList li {
+    color: #222;
+
+    background: rgba(255, 255, 255, 0.6);
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media (max-width: 400px) {
+
+    .calculator {
+        padding: 18px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    #display {
+        font-size: 24px;
+    }
+
+    button {
+        height: 50px;
+
+        font-size: 17px;
+    }
+
+    .scientific-buttons button,
+    .memory-buttons button {
+        font-size: 13px;
+    }
+
+}
+
+/* Bigger Number Buttons */
+
+.buttons button {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+/* AC and DEL */
+
+.buttons .clear,
+.buttons button:nth-child(2) {
+    font-size: 20px;
+}
+
+/* Square Calculator Buttons */
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.buttons button {
+    height: 60px;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    font-size: 24px;
+}
+
+/* AC and DEL */
+
+.buttons .clear,
+.buttons button:nth-child(2) {
+    font-size: 18px;
+}
+
+/* Zero Button */
+
+.buttons .zero {
+    grid-column: span 2;
+    aspect-ratio: auto;
+}
+
+/* =================================
+   PREMIUM BUTTON ANIMATIONS
+   ================================= */
+
+.calculator button {
+    transition: 
+        transform 0.12s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+/* Hover Animation */
+
+.calculator button:hover {
+    transform: translateY(-3px) scale(1.03);
+    filter: brightness(1.15);
+}
+
+/* Click Animation */
+
+.calculator button:active {
+    transform: scale(0.92);
+}
+
+/* Premium Glow */
+
+.calculator button:hover {
+    box-shadow:
+        0 0 10px rgba(0, 255, 255, 0.35),
+        0 0 20px rgba(0, 255, 255, 0.15);
+}
+
+/* Calculator Card Animation */
+
+.calculator {
+    animation: calculatorAppear 0.7s ease;
+}
+
+@keyframes calculatorAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(0.85) translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Display Glow */
+
+#display {
+    transition:
+        box-shadow 0.3s ease,
+        transform 0.2s ease;
+}
+
+#display:focus {
+    transform: scale(1.01);
+
+    box-shadow:
+        0 0 12px rgba(0, 255, 255, 0.4),
+        0 0 25px rgba(0, 255, 255, 0.15);
+}
+
+/* History Animation */
+
+.history li {
+    animation: historyAppear 0.35s ease;
+}
+
+@keyframes historyAppear {
+
+    from {
+        opacity: 0;
+        transform: translateX(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* =================================
+   MOBILE RESPONSIVE DESIGN
+   ================================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 15px;
+    }
+
+    .calculator {
+        width: 100%;
+        max-width: 360px;
+        padding: 18px;
+    }
+
+    .calculator h1 {
+        font-size: 26px;
+    }
+
+    #display {
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 28px;
+        height: 60px;
+    }
+
+    .scientific-buttons,
+    .memory-buttons {
+        gap: 7px;
+    }
+
+    .scientific-buttons button,
+    .memory-buttons button {
+        min-height: 45px;
+        font-size: 14px;
+    }
+
+    .buttons {
+        gap: 8px;
+    }
+
+    .buttons button {
+        height: 55px;
+        font-size: 20px;
+    }
+
+    .buttons .clear,
+    .buttons button:nth-child(2) {
+        font-size: 14px;
+    }
+
+    #themeToggle,
+    #soundToggle {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+}
+
+/* Very Small Phones */
+
+@media (max-width: 380px) {
+
+    .calculator {
+        padding: 12px;
+    }
+
+    .buttons {
+        gap: 6px;
+    }
+
+    .buttons button {
+        height: 50px;
+        font-size: 18px;
+    }
+
+    .scientific-buttons button,
+    .memory-buttons button {
+        font-size: 12px;
+    }
+
+}
+
+/* =================================
+   PREMIUM THEME SELECTOR
+   ================================= */
+
+#themeSelector {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+
+    font-size: 15px;
+    cursor: pointer;
+
+    outline: none;
+
+    transition: 0.3s ease;
+}
+
+#themeSelector:hover {
+    transform: scale(1.02);
+}
+
+#themeSelector option {
+    background: #111;
+    color: white;
+}
+
+
+/* =================================
+   OCEAN THEME
+   ================================= */
+
+body.ocean-theme {
+    background: linear-gradient(
+        135deg,
+        #001f3f,
+        #003d66,
+        #0077b6
+    );
+}
+
+body.ocean-theme .calculator {
+    box-shadow:
+        0 0 25px rgba(0, 180, 255, 0.5);
+}
+
+
+/* =================================
+   PURPLE THEME
+   ================================= */
+
+body.purple-theme {
+    background: linear-gradient(
+        135deg,
+        #16002b,
+        #3b0066,
+        #7209b7
+    );
+}
+
+body.purple-theme .calculator {
+    box-shadow:
+        0 0 25px rgba(180, 80, 255, 0.5);
+}
+
+
+/* =================================
+   SUNSET THEME
+   ================================= */
+
+body.sunset-theme {
+    background: linear-gradient(
+        135deg,
+        #3b1023,
+        #8f2d56,
+        #ff7b00
+    );
+}
+
+body.sunset-theme .calculator {
+    box-shadow:
+        0 0 25px rgba(255, 120, 30, 0.5);
+}
+
+
+/* =================================
+   MATRIX THEME
+   ================================= */
+
+body.matrix-theme {
+    background: linear-gradient(
+        135deg,
+        #001a00,
+        #003300,
+        #006600
+    );
+}
+
+body.matrix-theme .calculator {
+    box-shadow:
+        0 0 25px rgba(0, 255, 80, 0.5);
+}
+
+
+/* =================================
+   THEME TRANSITION
+   ================================= */
+
+body {
+    transition:
+        background 0.5s ease;
+}
+
+.calculator {
+    transition:
+        box-shadow 0.5s ease;
+}
